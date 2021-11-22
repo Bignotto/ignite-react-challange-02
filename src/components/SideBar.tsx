@@ -1,22 +1,24 @@
-import { useState } from "react";
-import { Button } from "./Button";
-import "../styles/sidebar.scss";
+import { useState } from "react"
+import { Button } from "./Button"
+import "../styles/sidebar.scss"
 
 interface MovieGenre {
-  id: number;
-  name: "action" | "comedy" | "documentary" | "drama" | "horror" | "family";
-  title: string;
+  id: number
+  name: "action" | "comedy" | "documentary" | "drama" | "horror" | "family"
+  title: string
 }
 interface MoviesGenresProps {
-  genres: MovieGenre[];
+  genres: MovieGenre[]
+  setSelectedFunction: (genreId: number) => void
 }
 
-export function SideBar(props: MoviesGenresProps) {
+export function SideBar({ genres, setSelectedFunction }: MoviesGenresProps) {
   // Complete aqui
-  const [selectedGenreId, setSelectedGenreId] = useState(1);
+  const [selectedGenreId, setSelectedGenreId] = useState(1)
 
   function handleClickButton(id: number) {
-    setSelectedGenreId(id);
+    setSelectedGenreId(id)
+    setSelectedFunction(id)
   }
 
   return (
@@ -26,7 +28,7 @@ export function SideBar(props: MoviesGenresProps) {
       </span>
 
       <div className="buttons-container">
-        {props.genres.map(genre => (
+        {genres.map(genre => (
           <Button
             key={String(genre.id)}
             title={genre.title}
@@ -37,5 +39,5 @@ export function SideBar(props: MoviesGenresProps) {
         ))}
       </div>
     </nav>
-  );
+  )
 }
