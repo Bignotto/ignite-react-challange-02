@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import { Button } from "./components/Button"
 import { MovieCard } from "./components/MovieCard"
@@ -37,6 +37,10 @@ export function App() {
     {} as GenreResponseProps
   )
 
+  const updateSelectedGenre = useCallback(async (id: number) => {
+    setSelectedGenreId(id)
+  }, [])
+
   useEffect(() => {
     api.get<GenreResponseProps[]>("genres").then(response => {
       setGenres(response.data)
@@ -57,7 +61,7 @@ export function App() {
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
-      <SideBar genres={genres} setSelectedFunction={setSelectedGenreId} />
+      <SideBar genres={genres} setSelectedFunction={updateSelectedGenre} />
       <Content title={selectedGenre.title} movies={movies} />
     </div>
   )
