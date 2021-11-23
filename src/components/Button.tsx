@@ -25,9 +25,6 @@ function ButtonComponent({ iconName, title, selected, ...rest }: ButtonProps) {
 export const Button = memo(
   ButtonComponent,
   (prevProps: ButtonProps, nextProps: ButtonProps) => {
-    return (
-      prevProps.iconName === nextProps.iconName &&
-      prevProps.selected === nextProps.selected
-    )
+    return Object.is(nextProps, prevProps)
   }
 )
